@@ -1,0 +1,118 @@
+var canvas = new fabric.Canvas("miCanvas");
+block_width=30;
+block_height=30;
+juan_x=10;
+juan_y=10;
+var juan_object="";
+function juan_update(){
+    fabric.Image.fromURL("player.png",function(Img){
+        juan_object=Img;
+        juan_object.scaleToWidth(150);
+        juan_object.scaleToHeight(140);
+        juan_object.set({top:juan_y,left:juan_x});
+        canvas.add(juan_object);
+    });
+}
+function new_image(get_image){
+    fabric.Image.fromURL(get_image,function(Img){
+        block_image=Img;
+        block_image.scaleToWidth(block_width);
+        block_image.scaleToHeight(block_height);
+        block_image.set({top:juan_y,left:juan_x});
+        canvas.add(block_image);
+    });
+}
+window.addEventListener("keydown",my_keydown);
+function my_keydown(e){
+    keyPressed=e.keyCode;
+    console.log(keyPressed);
+    if(keyPressed=="80"&&e.shiftKey==true){
+        block_width=block_width+10;
+        block_height=block_height+10;
+        document.getElementById("ancho_actual").innerHTML=block_width;
+        document.getElementById("altura_actual").innerHTML=block_height;
+    }
+    if(keyPressed=="77"&&e.shiftKey==true){
+        block_width=block_width-10;
+        block_height=block_height-10;
+        document.getElementById("ancho_actual").innerHTML=block_width;
+        document.getElementById("altura_actual").innerHTML=block_height;
+    }
+    if(keyPressed=="38"){
+        up();
+    }
+    if(keyPressed=="40"){
+        down();
+    }
+    if(keyPressed=="37"){
+        left();
+    }
+    if(keyPressed=="39"){
+        right();
+    }
+    if(keyPressed=="72"){
+        console.log("h");
+         new_image("cloud.jpg");
+    }
+    if(keyPressed=="67"){
+        console.log("c");
+        new_image("ground.png");
+    }
+    if(keyPressed=="79"){
+        console.log("o");
+        new_image("dark_green.png");
+    }
+    if(keyPressed=="65"){
+        console.log("a");
+        new_image("light_green.png");
+    }
+    if(keyPressed=="84"){
+        console.log("t");
+        new_image("roof.jpg");
+    }
+    if(keyPressed=="82"){
+        console.log("r");
+        new_image("trunk.jpg");
+    }
+    if(keyPressed=="66"){
+        console.log("b");
+        new_image("unique.png");
+    }
+    if(keyPressed=="74"){
+        console.log("j");
+        new_image("wall.jpg");
+    }
+    if(keyPressed=="75"){
+        console.log("k");
+        new_image("yellow_wall.png");
+    }
+}
+function up(){
+    if(juan_y>=0){
+        juan_y=juan_y-block_height;
+        canvas.remove(juan_object);
+        juan_update();
+    }
+}
+function down(){
+    if(juan_y<=500){
+        juan_y=juan_y+block_height;
+        canvas.remove(juan_object);
+        juan_update();
+    }
+}
+function right(){
+    if(juan_x<=850){
+        juan_x=juan_x+block_width;
+        canvas.remove(juan_object);
+        juan_update();
+    }
+    
+}
+function left(){
+    if(juan_x>=0){
+        juan_x=juan_x-block_width;
+        canvas.remove(juan_object);
+        juan_update();
+    }
+    }
